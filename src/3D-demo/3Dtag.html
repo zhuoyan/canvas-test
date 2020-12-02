@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
   <style>
@@ -29,47 +30,48 @@
   </style>
   <title>3D标签云</title>
 </head>
+
 <body>
-<div class="tagBall">
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">3D标签云</a>
-  <a class="tag" href="#">WAXES</a>
-  <a class="tag" href="#">3D标签云</a>
-</div>
-<script>
-  var tagEle = "querySelectorAll" in document ? document.querySelectorAll(".tag") : getClass("tag"),
+  <div class="tagBall">
+    <a class="tag" href="#">湖北</a>
+    <a class="tag" href="#">湖南</a>
+    <a class="tag" href="#">河北</a>
+    <a class="tag" href="#">河南</a>
+    <a class="tag" href="#">云南</a>
+    <a class="tag" href="#">贵州</a>
+    <a class="tag" href="#">江苏</a>
+    <a class="tag" href="#">浙江</a>
+    <a class="tag" href="#">新疆</a>
+    <a class="tag" href="#">西藏</a>
+    <a class="tag" href="#">山东</a>
+    <a class="tag" href="#">北京</a>
+    <a class="tag" href="#">上海</a>
+    <a class="tag" href="#">重庆</a>
+    <a class="tag" href="#">天津</a>
+    <a class="tag" href="#">香港</a>
+    <a class="tag" href="#">宁夏</a>
+    <a class="tag" href="#">青海</a>
+    <a class="tag" href="#">西藏</a>
+    <a class="tag" href="#">内蒙古</a>
+    <a class="tag" href="#">广西</a>
+    <a class="tag" href="#">台湾</a>
+    <a class="tag" href="#">广东</a>
+    <a class="tag" href="#">福建</a>
+    <a class="tag" href="#">海南</a>
+    <a class="tag" href="#">安徽</a>
+    <a class="tag" href="#">江西</a>
+    <a class="tag" href="#">香港</a>
+    <a class="tag" href="#">澳门</a>
+    <a class="tag" href="#">四川</a>
+    <a class="tag" href="#">吉林</a>
+    <a class="tag" href="#">辽宁</a>
+    <a class="tag" href="#">黑龙江</a>
+    <a class="tag" href="#">湖北</a>
+  </div>
+  <script>
+    var tagEle = "querySelectorAll" in document ? document.querySelectorAll(".tag") : getClass("tag"),
       paper = "querySelectorAll" in document ? document.querySelector(".tagBall") : getClass("tagBall")[0];
-  RADIUS = 220,
+    RADIUS = 220,
       fallLength = 500,
       tags = [],
       angleX = Math.PI / 500,
@@ -79,112 +81,113 @@
       EX = paper.offsetLeft + document.body.scrollLeft + document.documentElement.scrollLeft,
       EY = paper.offsetTop + document.body.scrollTop + document.documentElement.scrollTop;
 
-  function getClass(className) {
-    var ele = document.getElementsByTagName("*");
-    var classEle = [];
-    for (var i = 0; i < ele.length; i++) {
-      var cn = ele[i].className;
-      if (cn === className) {
-        classEle.push(ele[i]);
+    function getClass(className) {
+      var ele = document.getElementsByTagName("*");
+      var classEle = [];
+      for (var i = 0; i < ele.length; i++) {
+        var cn = ele[i].className;
+        if (cn === className) {
+          classEle.push(ele[i]);
+        }
+      }
+      return classEle;
+    }
+
+    function innit() {
+      for (var i = 0; i < tagEle.length; i++) {
+        var a, b;
+        var k = -1 + (2 * (i + 1) - 1) / tagEle.length;
+        var a = Math.acos(k);
+        var b = a * Math.sqrt(tagEle.length * Math.PI);
+        var x = RADIUS * Math.sin(a) * Math.cos(b);
+        var y = RADIUS * Math.sin(a) * Math.sin(b);
+        var z = RADIUS * Math.cos(a);
+        var t = new tag(tagEle[i], x, y, z);
+        tagEle[i].style.color = "rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
+        tags.push(t);
+        t.move();
       }
     }
-    return classEle;
-  }
 
-  function innit() {
-    for (var i = 0; i < tagEle.length; i++) {
-      var a, b;
-      var k = -1 + (2 * (i + 1) - 1) / tagEle.length;
-      var a = Math.acos(k);
-      var b = a * Math.sqrt(tagEle.length * Math.PI);
-      var x = RADIUS * Math.sin(a) * Math.cos(b);
-      var y = RADIUS * Math.sin(a) * Math.sin(b);
-      var z = RADIUS * Math.cos(a);
-      var t = new tag(tagEle[i], x, y, z);
-      tagEle[i].style.color = "rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
-      tags.push(t);
-      t.move();
+    Array.prototype.forEach = function (callback) {
+      for (var i = 0; i < this.length; i++) {
+        callback.call(this[i]);
+      }
     }
-  }
 
-  Array.prototype.forEach = function(callback) {
-    for (var i = 0; i < this.length; i++) {
-      callback.call(this[i]);
+    function animate() {
+      rotateX();
+      rotateY();
+      tags.forEach(function () {
+        this.move();
+      });
+
+      requestAnimationFrame(animate);
     }
-  }
 
-  function animate() {
-    rotateX();
-    rotateY();
-    tags.forEach(function() {
-      this.move();
-    });
-
-    requestAnimationFrame(animate);
-  }
-
-  if ("addEventListener" in window) {
-    paper.addEventListener("mousemove", function(event) {
-      var x = event.clientX - EX - CX;
-      var y = event.clientY - EY - CY;
-      angleY = x * 0.0001;
-      angleX = y * 0.0001;
-    });
-  }
-  else {
-    paper.attachEvent("onmousemove", function(event) {
-      var x = event.clientX - EX - CX;
-      var y = event.clientY - EY - CY;
-      angleY = x * 0.0001;
-      angleX = y * 0.0001;
-    });
-  }
-
-  function rotateX() {
-    var cos = Math.cos(angleX);
-    var sin = Math.sin(angleX);
-    tags.forEach(function() {
-      var y1 = this.y * cos - this.z * sin;
-      var z1 = this.z * cos + this.y * sin;
-      this.y = y1;
-      this.z = z1;
-    })
-
-  }
-
-  function rotateY() {
-    var cos = Math.cos(angleY);
-    var sin = Math.sin(angleY);
-    tags.forEach(function() {
-      var x1 = this.x * cos - this.z * sin;
-      var z1 = this.z * cos + this.x * sin;
-      this.x = x1;
-      this.z = z1;
-    })
-  }
-
-  var tag = function(ele, x, y, z) {
-    this.ele = ele;
-    this.x = x;
-    this.y = y;
-    this.z = z;
-  }
-
-  tag.prototype = {
-    move: function() {
-      var scale = fallLength / (fallLength - this.z);
-      var alpha = (this.z + RADIUS) / (2 * RADIUS);
-      var left = this.x + CX - this.ele.offsetWidth / 2 + "px";
-      var top = this.y + CY - this.ele.offsetHeight / 2 + "px";
-      var transform = 'translate(' + left + ', ' + top + ') scale(' + scale + ')';
-      this.ele.style.opacity = alpha + 0.5;
-      this.ele.style.zIndex = parseInt(scale * 100);
-      this.ele.style.transform = transform;
-      this.ele.style.webkitTransform = transform;
+    if ("addEventListener" in window) {
+      paper.addEventListener("mousemove", function (event) {
+        var x = event.clientX - EX - CX;
+        var y = event.clientY - EY - CY;
+        angleY = x * 0.0001;
+        angleX = y * 0.0001;
+      });
     }
-  }
-  innit();
-  animate();
-</script>
+    else {
+      paper.attachEvent("onmousemove", function (event) {
+        var x = event.clientX - EX - CX;
+        var y = event.clientY - EY - CY;
+        angleY = x * 0.0001;
+        angleX = y * 0.0001;
+      });
+    }
+
+    function rotateX() {
+      var cos = Math.cos(angleX);
+      var sin = Math.sin(angleX);
+      tags.forEach(function () {
+        var y1 = this.y * cos - this.z * sin;
+        var z1 = this.z * cos + this.y * sin;
+        this.y = y1;
+        this.z = z1;
+      })
+
+    }
+
+    function rotateY() {
+      var cos = Math.cos(angleY);
+      var sin = Math.sin(angleY);
+      tags.forEach(function () {
+        var x1 = this.x * cos - this.z * sin;
+        var z1 = this.z * cos + this.x * sin;
+        this.x = x1;
+        this.z = z1;
+      })
+    }
+
+    var tag = function (ele, x, y, z) {
+      this.ele = ele;
+      this.x = x;
+      this.y = y;
+      this.z = z;
+    }
+
+    tag.prototype = {
+      move: function () {
+        var scale = fallLength / (fallLength - this.z);
+        var alpha = (this.z + RADIUS) / (2 * RADIUS);
+        var left = - this.x + CX - this.ele.offsetWidth / 2 + "px";
+        var top = - this.y + CY - this.ele.offsetHeight / 2 + "px";
+        var transform = 'translate(' + left + ', ' + top + ') scale(' + scale + ')';
+        this.ele.style.opacity = alpha + 0.5;
+        this.ele.style.zIndex = parseInt(scale * 100);
+        this.ele.style.transform = transform;
+        this.ele.style.webkitTransform = transform;
+      }
+    }
+    innit();
+    animate();
+  </script>
 </body>
+
 </html>
